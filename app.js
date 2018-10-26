@@ -28,7 +28,7 @@ app.post('/api/v1/weather', function (req, res) {
     if (!req.body) return res.sendStatus(400)
 
     var zipcode = req.body.zipcode;
-    var requestString = 'https://api.openweathermap.org/data/2.5/weather?q=' + zipcode + '&appid=' + process.env.OPENWEATHER_API_KEY;
+    var requestString = 'https://api.openweathermap.org/data/2.5/weather?q=' + zipcode + '&units=imperial&appid=' + process.env.OPENWEATHER_API_KEY;
 
     request(requestString, function (error, response, body) {
         var jsonGeo = JSON.parse(body);
@@ -37,7 +37,7 @@ app.post('/api/v1/weather', function (req, res) {
 });
 
 setInterval(function () {
-    var requestString = 'https://api.openweathermap.org/data/2.5/forecast?q=07306&appid=' + process.env.OPENWEATHER_API_KEY;
+    var requestString = 'https://api.openweathermap.org/data/2.5/forecast?q=07306&units=imperial&appid=' + process.env.OPENWEATHER_API_KEY;
     var reqs = request(requestString, function (error, response, body) {
         var jsonGeo = JSON.parse(body);
         var todayForecast = _.filter(jsonGeo.list, (val) => {
