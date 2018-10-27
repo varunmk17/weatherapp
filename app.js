@@ -37,7 +37,6 @@ app.post('/api/v1/weather', function (req, res) {
 });
 
 setInterval(function () {
-    console.log('Hi.');
     var requestString = 'https://api.openweathermap.org/data/2.5/forecast?q=07306&units=imperial&appid=' + process.env.OPENWEATHER_API_KEY;
     var reqs = request(requestString, function (error, response, body) {
         var jsonGeo = JSON.parse(body);
@@ -58,6 +57,6 @@ setInterval(function () {
             sgMail.send(msg);
         }
     });
-}, 5000); //4 Hrs
+}, 60000);
 
 module.exports = app;
