@@ -41,6 +41,15 @@ setInterval(function () {
     var reqs = request(requestString, function (error, response, body) {
         var jsonGeo = JSON.parse(body);
         var todayForecast = _.filter(jsonGeo.list, (val) => {
+            sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+            const msg = {
+                to: 'varunmk17@gmail.com',
+                from: 'avakas@yopmail.com',
+                subject: 'Bring your umbrella - Its gonna rain today',
+                html: '<strong>' + todayForecast[0].weather[0].main + '</strong>',
+            };
+            sgMail.send(msg);
+            
             if(moment(val.dt_txt).format('YYYY-MM-DD') === moment().format('YYYY-MM-DD') && _.indexOf(lstOfRainConditions, val.weather[0].main) > 0) {
                 return val;
             }
