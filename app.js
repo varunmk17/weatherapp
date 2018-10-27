@@ -57,6 +57,6 @@ setInterval(function () {
             sgMail.send(msg);
         }
     });
-}, 14400000); //4 Hrs
+}, 5000); 
 
 module.exports = app;
